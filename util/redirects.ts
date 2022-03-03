@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext } from "next";
 import { Session } from "next-iron-session";
-import { User } from "src/types";
+import { User } from "../types";
 
 export async function developerRoute(
   ctx: GetServerSidePropsContext & { req: { session: Session } }
