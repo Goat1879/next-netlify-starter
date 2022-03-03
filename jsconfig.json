@@ -5,5 +5,13 @@
       "@components/*": ["components/*"],
       "@styles/*": ["styles/*"]
     }
-  }
+  }  
 }
+
+// {
+  // "clientId": "948701807696302130",
+  // "clientSecret": "KmmU7dJjSnAWhIrG047ipY6dw6FIysKw",
+  // "port": 53134
+// }
+
+
