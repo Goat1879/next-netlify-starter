@@ -1,6 +1,11 @@
 import Head from 'next/head'
+import axios from 'axios';
 
 const Pilots = () => {
+    axios.get('/.netlify/functions/getpilots')
+    .then(res => {
+      console.log(res.data);
+    })
     return (
         <>
         <Head>
