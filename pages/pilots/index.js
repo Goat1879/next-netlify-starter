@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 const Pilots = () => {
-    const [users, setUsers] = useState()
+    const [users, setUsers] = useState([])
     useEffect(() => {
         axios.get('/.netlify/functions/getpilots')
             .then(res => {
