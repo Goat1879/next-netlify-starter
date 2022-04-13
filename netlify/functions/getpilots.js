@@ -1,44 +1,41 @@
-var mongoose = require('mongoose');
+const MongoClient = require("mongodb").MongoClient;
 
-let conn = null;
+const MONGODB_URI = process.env.MONGODB_URI;
+const DB_NAME = process.env.MONGODB_DB;
 
-const uri = process.env.MONGODB_URI;
+let cachedDb = null;
 
-exports.handler = function (event, context, callback) {
+const connectToDatabase = async (uri) => {
+  // we can cache the access to our database to speed things up a bit
+  // (this is the only thing that is safe to cache here)
+  if (cachedDb) return cachedDb;
 
-  context.callbackWaitsForEmptyEventLoop = false;
+  const client = await MongoClient.connect(uri, {
+    useUnifiedTopology: true,
+  });
 
-  run().
-    then(res => {
-      callback(null, res);
-    }).
-    catch(error => callback(error));
+  cachedDb = client.db(DB_NAME);
+
+  return cachedDb;
 };
 
-function run() {
+const queryDatabase = async (db) => {
+  const users = await db.collection("users").find({}).toArray();
 
-
-  if (conn == null) {
-    conn = yield mongoose.createConnection(uri, {
-      bufferCommands: false,
-      bufferMaxEntries: 0
-    });
-    conn.model('users', new mongoose.Schema({
-      avatar: String,
-      discriminator: String,
-      email: String,
-      ip: String,
-      name: String
-    }));
-  }
-
-  const M = conn.model('users');
-
-  const doc = yield M.find();
-  const response = {
+  return {
     statusCode: 200,
-    body: JSON.stringify(doc)
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(users),
   };
-  return response;
+};
 
-}
+module.exports.handler = async (event, context) => {
+  // otherwise the connection will never complete, since
+  // we keep the DB connection alive
+  context.callbackWaitsForEmptyEventLoop = false;
+
+  const db = await connectToDatabase(MONGODB_URI);
+  return queryDatabase(db);
+};
