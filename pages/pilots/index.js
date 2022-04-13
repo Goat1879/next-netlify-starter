@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 const Pilots = () => {
     const [users, setUsers] = useState([])
     useEffect(() => {
-        axios.get('/.netlify/functions/getpilots')
+        axios.get('/netlify/functions/getpilots')
             .then(res => {
                 setUsers(res.data);
             })
