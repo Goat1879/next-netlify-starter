@@ -12,6 +12,7 @@ const Navbar = () => {
            <Link href='/'><a>Home</a></Link>
            <Link href="about"><a>About</a></Link>
            <Link href="pilots"><a>Pilots</a></Link>
+           <Link href="/ships"><a>Ships</a></Link>
            <Link href="discord"><a>Login</a></Link>
        </nav> 
     );

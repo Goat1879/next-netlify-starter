@@ -1,12 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap");
+
+html {
+  background-color: #333;
+}
 
 body {
-  background: #f2f2f2;
-  color: #333;
+  background: #f2f2f200;
+  color: rgb(193, 189, 189);
   font-family: "Nunito";
 }
 a {
-  color: #333;
+  color: rgb(193, 189, 189);
   text-decoration: none;
 }
 .content {
@@ -40,7 +44,7 @@ footer {
   text-align: center;
 }
 
-.not-found a{
+.not-found a {
   color: #4979ff;
   text-decoration: underline;
 }
