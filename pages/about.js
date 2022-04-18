@@ -1,4 +1,5 @@
 import Head from "next/head";
+import styles from "../styles/Home.module.css";
 
 const About = () => {
   return (
@@ -9,7 +10,7 @@ const About = () => {
       </Head>
       <div>
         <h1>About</h1>
-        <p>
+        <p className={styles.text}>
           The residents of earth, a rare blue ball teeming with life, thought
           they were alone in the universe…until the arrival of the Galactics.
           Representatives of the Galactics, a federation of ancient species
